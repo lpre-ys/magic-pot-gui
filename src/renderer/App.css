@@ -1,0 +1,169 @@
+body {
+  color: #111;
+}
+
+.main {
+  display: flex;
+}
+
+.loader {
+  border: 2px dotted #555;
+  border-radius: 2px;
+  height: 400px;
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.log {
+  padding-left: 1rem;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.log-header button {
+  margin-right: 2rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #c62828;
+  cursor: pointer;
+}
+.log-header button:disabled {
+  color: #b0bec5;
+  cursor: wait;
+}
+.inner {
+  width: 100%;
+  height: 400px;
+  cursor: pointer;
+}
+
+.inner > p {
+  margin: 0;
+  padding-top: 150px;
+}
+
+.config {
+  display: flex;
+}
+
+.config h3 {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.config p {
+  margin: 0.2rem 0.5rem;
+  padding: 0;
+}
+
+.config > div {
+  padding: 0 1rem 1rem 0;
+}
+
+.output p {
+  display: flex;
+  align-items: center;
+  width: 700px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.output p button {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.color {
+  width: 210px;
+}
+
+.color input {
+  cursor: pointer;
+}
+
+.log h2 {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+.log table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 1rem;
+}
+.log th {
+  text-align: left;
+  border-bottom: 1px solid #4fc3f7;
+}
+.log tr {
+  border-top: 1px dotted #4fc3f7;
+}
+.log tr:first-child {
+  border-top: none;
+}
+.log thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.log tbody {
+  display: block;
+  max-height: 120px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.log tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.log .status {
+  width: 2rem;
+  text-align: center;
+}
+
+.log .time {
+  width: 160px;
+  text-align: center;
+}
+
+.log .files {
+  width: 650px;
+}
+.log .files p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 800px;
+  margin: 0;
+  padding: 0;
+}
+
+.log a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.errorFiles {
+  background: #ffebee;
+  position: absolute;
+  padding: 0.5rem;
+  margin: 0;
+  font-size: 0.9rem;
+  width: 300px;
+  transform: translate(-100%, -100%);
+}
+
+.errorFiles p {
+  margin: 0;
+  padding: 0;
+}
