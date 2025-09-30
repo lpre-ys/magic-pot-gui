@@ -58,7 +58,7 @@ export default function Loader({
         setBatchs((prev) => [...prev, batch]);
       }
     },
-    [t]
+    [t, transparentColor, outputPath, setBatchs]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
