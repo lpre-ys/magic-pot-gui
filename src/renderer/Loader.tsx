@@ -36,6 +36,10 @@ export default function Loader({
   }
 
   const onDrop = useCallback(async (accepted: FileWithPath[]) => {
+    if (!accepted.length) {
+      alert("処理対象のファイルがありませんでした");
+      return;
+    }
     const batch: Batch = {
       files: accepted.map((file) => file.path as string),
       id: crypto.randomUUID(),
@@ -57,7 +61,6 @@ export default function Loader({
     accept: {
       "image/png": [],
     },
-    maxFiles: 1000,
     multiple: true,
   });
 
@@ -68,8 +71,6 @@ export default function Loader({
         <div className="inner">
           <p>
             PNGファイルをドラッグ＆ドロップ、またはクリックして選択してください。
-            <br />
-            （一度に処理できるのは1000枚までです）
           </p>
         </div>
       </div>
