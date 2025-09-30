@@ -11,4 +11,5 @@ export type Batch = {
 export type StoreType = {
   transparentColor: [number, number, number];
   outputPath: string;
+  lang: string;
 };

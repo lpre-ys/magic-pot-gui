@@ -1,0 +1,11 @@
+{
+  "lang": "Language",
+  "transparentColor": "Transparent Color",
+  "outputPath": "Output Path",
+  "notSelected": "Not selected",
+  "selectFolder": "Select Folder",
+  "loaderInfo": "Drag & drop PNG files here, or click to select",
+  "noFile": "No PNG files found.",
+  "magickNotFound": "Magick command not found",
+  "magickNotFoundDetail": "This application requires the `magick` command from ImageMagick v7.\nPlease install it, add it to PATH, and restart the application."
+}

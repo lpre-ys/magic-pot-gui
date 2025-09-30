@@ -6,22 +6,13 @@ import fs from "node:fs";
 import paletteSorter from "./bridges/palette-sorter";
 import { promisify } from "node:util";
 import { execFile } from "node:child_process";
-import Store from "electron-store";
+import i18n from "./i18n";
+import { store } from "./store";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
 }
-type StoreType = {
-  transparentColor: [number, number, number];
-  outputPath: string;
-};
-const store = new Store<StoreType>({
-  defaults: {
-    transparentColor: [0, 255, 0],
-    outputPath: "",
-  },
-});
 
 const createWindow = () => {
   // Create the browser window.
@@ -58,11 +49,8 @@ app.whenReady().then(async () => {
     createWindow();
   } catch (e) {
     dialog.showErrorBox(
-      "imagickコマンドが見つかりませんでした",
-      [
-        "当アプリの利用にはImageMagick V7系の`magick`コマンドが必要です。",
-        "インストールおよびPATHの設定後、アプリを再起動してください。",
-      ].join("\n")
+      i18n.t("magickNotFound"),
+      i18n.t("magickNotFoundDetail")
     );
     app.exit(1);
   }
@@ -100,16 +88,14 @@ async function checkImageMagick(): Promise<string> {
     const { stdout } = await execFileAsync("magick", ["-version"]);
     const line = stdout.split(/\r?\n/)[0] ?? "";
     const m = line.match(/ImageMagick\s+(\d+)\./i);
-    if (!m) throw new Error("バージョン記述が見つからないエラー");
+    if (!m) throw new Error("version text not found.");
     const major = Number(m[1]);
     if (Number.isNaN(major) || major < 7) {
-      throw new Error(`バージョン判定エラー`);
+      throw new Error(`version check error.`);
     }
     return m[0];
   } catch (e) {
-    throw new Error(
-      "ImageMagick（v7 以降）の `magick` コマンドが見つかりませんでした。"
-    );
+    throw new Error("Magick command not found.");
   }
 }
 
@@ -124,7 +110,8 @@ ipcMain.handle("select-output-dir", async () => {
 ipcMain.handle("get-settings", () => {
   const transparentColor = store.get("transparentColor");
   const outputPath = store.get("outputPath");
-  return { transparentColor, outputPath };
+  const lang = store.get("lang");
+  return { transparentColor, outputPath, lang };
 });
 
 ipcMain.handle("set-settings", async (event, { key, value }) => {

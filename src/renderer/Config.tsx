@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { colord } from "colord";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   outputPath: string;
@@ -8,6 +9,8 @@ type Props = {
   setTransparentColor: React.Dispatch<
     React.SetStateAction<[number, number, number]>
   >;
+  lang: string;
+  setLang: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function Config({
@@ -15,7 +18,11 @@ export default function Config({
   setOutputPath,
   transparentColor,
   setTransparentColor,
+  lang,
+  setLang,
 }: Props) {
+  const { t, i18n } = useTranslation();
+
   const hex = useMemo<string>(() => {
     return colord({
       r: transparentColor[0],
@@ -35,26 +42,38 @@ export default function Config({
       window.api.setSettings("outputPath", dir);
     }
   };
+  const handleSelectLang = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLang(e.target.value);
+    i18n.changeLanguage(e.target.value);
+    window.api.setSettings("lang", e.target.value);
+  };
   return (
     <section className="config">
       <div className="color">
-        <h3>透過色</h3>
+        <h3>{t("transparentColor")}</h3>
         <p>
           <input type="color" value={hex} onChange={handleChangeColor} />
           RGB({transparentColor.join(",")})
         </p>
       </div>
       <div className="output">
-        <h3>出力先</h3>
+        <h3>{t("outputPath")}</h3>
         <p
           onClick={handleSelectOutputDir}
           style={{
             color: outputPath ? "#111" : "darkred",
           }}
         >
-          {outputPath ? outputPath : "未選択"}
-          <button onClick={handleSelectOutputDir}>フォルダ選択</button>
+          {outputPath ? outputPath : t("notSelected")}
+          <button>{t("selectFolder")}</button>
         </p>
+      </div>
+      <div className="language">
+        <h3>{t("lang")}</h3>
+        <select name="lang" onChange={handleSelectLang} value={lang}>
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+        </select>
       </div>
     </section>
   );

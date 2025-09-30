@@ -11,6 +11,7 @@ declare global {
       getSettings: () => {
         transparentColor: [number, number, number];
         outputPath: string;
+        lang: string;
       };
       setSettings: (
         key: string,

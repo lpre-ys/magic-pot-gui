@@ -1,6 +1,7 @@
 import { useDropzone, FileWithPath, DropEvent } from "react-dropzone";
 import { useCallback } from "react";
 import { Batch } from "../types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setBatchs: React.Dispatch<React.SetStateAction<Batch[]>>;
@@ -13,6 +14,8 @@ export default function Loader({
   transparentColor,
   outputPath,
 }: Props) {
+  const { t } = useTranslation();
+
   async function getFilesFromEvent(event: DropEvent): Promise<FileWithPath[]> {
     const files: File[] = await new Promise((resolve) => {
       const dtFiles = (event as DragEvent).dataTransfer?.files;
@@ -35,25 +38,28 @@ export default function Loader({
     });
   }
 
-  const onDrop = useCallback(async (accepted: FileWithPath[]) => {
-    if (!accepted.length) {
-      alert("処理対象のファイルがありませんでした");
-      return;
-    }
-    const batch: Batch = {
-      files: accepted.map((file) => file.path as string),
-      id: crypto.randomUUID(),
-      success: 0,
-      error: 0,
-      transparentColor: transparentColor,
-      outputPath: outputPath,
-      time: new Date(),
-    };
-    const result = await window.api.execMagicPot(batch);
-    if (result) {
-      setBatchs((prev) => [...prev, batch]);
-    }
-  }, []);
+  const onDrop = useCallback(
+    async (accepted: FileWithPath[]) => {
+      if (!accepted.length) {
+        alert(t("noFile"));
+        return;
+      }
+      const batch: Batch = {
+        files: accepted.map((file) => file.path as string),
+        id: crypto.randomUUID(),
+        success: 0,
+        error: 0,
+        transparentColor: transparentColor,
+        outputPath: outputPath,
+        time: new Date(),
+      };
+      const result = await window.api.execMagicPot(batch);
+      if (result) {
+        setBatchs((prev) => [...prev, batch]);
+      }
+    },
+    [t]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     getFilesFromEvent,
@@ -69,9 +75,7 @@ export default function Loader({
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         <div className="inner">
-          <p>
-            PNGファイルをドラッグ＆ドロップ、またはクリックして選択してください。
-          </p>
+          <p>{t("loaderInfo")}</p>
         </div>
       </div>
     </div>

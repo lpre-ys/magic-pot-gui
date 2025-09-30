@@ -1,0 +1,11 @@
+{
+  "lang": "言語",
+  "transparentColor": "透過色",
+  "outputPath": "出力先",
+  "notSelected": "未選択",
+  "selectFolder": "フォルダ選択",
+  "loaderInfo": "PNGファイルをドラッグ＆ドロップ、またはクリックして選択してください",
+  "noFile": "処理対象のファイルがありませんでした",
+  "magickNotFound": "magickコマンドが見つかりませんでした",
+  "magickNotFoundDetail": "当アプリの利用にはImageMagick V7系の`magick`コマンドが必要です。\nインストールおよびPATHの設定後、アプリを再起動してください。"
+}
