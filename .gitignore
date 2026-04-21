@@ -90,3 +90,7 @@ typings/
 
 # Electron-Forge
 out/
+
+# claude
+CLAUDE.md
+.claude
