@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import { Batch } from "../types";
 import Log from "./Log";
 import { useTranslation } from "react-i18next";
+import { applyBatchUpdate } from "./batchReducer";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -30,28 +31,14 @@ export default function App() {
 
   useEffect(() => {
     const remove = window.api.onBatchDone((batch) => {
-      const { id, success, error, errorFiles } = batch;
-      setBatchs((prev) => {
-        return prev.map((batch) => {
-          return batch.id === id
-            ? { ...batch, success, error, errorFiles }
-            : batch;
-        });
-      });
+      setBatchs((prev) => applyBatchUpdate(prev, batch));
     });
 
     return () => remove();
   }, [batchs]);
   useEffect(() => {
     const remove = window.api.onBatchProgress((batch) => {
-      const { id, success, error, errorFiles } = batch;
-      setBatchs((prev) => {
-        return prev.map((batch) => {
-          return batch.id === id
-            ? { ...batch, success, error, errorFiles }
-            : batch;
-        });
-      });
+      setBatchs((prev) => applyBatchUpdate(prev, batch));
     });
 
     return () => remove();

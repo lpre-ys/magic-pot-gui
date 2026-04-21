@@ -9,7 +9,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": {
@@ -27,16 +29,22 @@
     "@electron-forge/plugin-fuses": "^7.9.0",
     "@electron-forge/plugin-vite": "^7.9.0",
     "@electron/fuses": "^1.8.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/electron-squirrel-startup": "^1.0.2",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "@vitest/coverage-v8": "^4.1.4",
     "electron": "38.1.2",
     "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.32.0",
+    "jsdom": "^29.0.2",
     "typescript": "5.6",
-    "vite": "^5.4.20"
+    "vite": "^5.4.20",
+    "vitest": "^4.1.4"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
