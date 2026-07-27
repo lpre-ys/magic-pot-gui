@@ -39,13 +39,16 @@ export default function Loader({
   }
 
   const onDrop = useCallback(
-    async (accepted: FileWithPath[]) => {
+    // react-dropzone v19 の onDrop は <T extends File> のジェネリックなので、
+    // より狭い FileWithPath[] では受けられない。path は getFilesFromEvent が
+    // 付与しているため、ここで FileWithPath として扱う。
+    async (accepted: File[]) => {
       if (!accepted.length) {
         alert(t("noFile"));
         return;
       }
       const batch: Batch = {
-        files: accepted.map((file) => file.path as string),
+        files: (accepted as FileWithPath[]).map((file) => file.path as string),
         id: crypto.randomUUID(),
         success: 0,
         error: 0,
