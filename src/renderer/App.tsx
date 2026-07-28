@@ -20,8 +20,9 @@ export default function App() {
     (async () => {
       const settings = await window.api.getSettings();
       setOutputPath(settings.outputPath ?? "");
-      settings.transparentColor &&
+      if (settings.transparentColor) {
         setTransparentColor(settings.transparentColor);
+      }
       if (settings.lang) {
         setLang(settings.lang);
         i18n.changeLanguage(settings.lang);

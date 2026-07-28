@@ -4,7 +4,6 @@ import { initReactI18next } from "react-i18next";
 import ja from "../locales/ja.json";
 import en from "../locales/en.json";
 
-// eslint-disable-next-line
 i18n.use(initReactI18next).init({
   resources: {
     ja: { translation: ja },
