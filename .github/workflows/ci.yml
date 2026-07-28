@@ -31,3 +31,28 @@ jobs:
       - run: npm run lint
       - run: npm run type-check
       - run: npm test
+
+  # package-lock.json からWindows用のプラットフォーム固有バイナリ
+  # （@rolldown/binding-win32-x64-msvc 等）が欠落していないか検証する。
+  # WSL側でnpmを実行するとlinux向けのものだけに絞られた lockfile が
+  # 生成されるが、ubuntu-latest のCIでは検出できないため。
+  windows-deps:
+    name: npm ci (windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Rewrite git ssh -> https (@electron/node-gyp依存対策)
+        shell: bash
+        run: |
+          git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - run: npm ci
