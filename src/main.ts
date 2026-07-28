@@ -47,7 +47,7 @@ app.whenReady().then(async () => {
   try {
     await checkImageMagick();
     createWindow();
-  } catch (e) {
+  } catch {
     dialog.showErrorBox(
       i18n.t("magickNotFound"),
       i18n.t("magickNotFoundDetail")
@@ -95,7 +95,7 @@ async function checkImageMagick(): Promise<string> {
     }
     return m[0];
   } catch (e) {
-    throw new Error("Magick command not found.");
+    throw new Error("Magick command not found.", { cause: e });
   }
 }
 

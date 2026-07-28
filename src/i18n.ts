@@ -3,7 +3,6 @@ import ja from "./locales/ja.json";
 import en from "./locales/en.json";
 import { store } from "./store";
 
-// eslint-disable-next-line
 i18n.init({
   resources: {
     ja: { translation: ja },
