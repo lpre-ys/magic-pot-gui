@@ -62,7 +62,7 @@
     "i18next": "^26.3.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-dropzone": "^19.1.1",
+    "react-dropzone": "^20.1.0",
     "react-i18next": "^17.0.11"
   }
 }
