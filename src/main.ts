@@ -135,7 +135,9 @@ ipcMain.handle("exec-magic-pot", async (event, batch: Batch) => {
 
 async function processQueue() {
   while (queue.length > 0) {
-    const { batch, wc } = queue.shift();
+    const item = queue.shift();
+    if (!item) break;
+    const { batch, wc } = item;
     try {
       const result = await runPaletteSorter(batch, wc);
 

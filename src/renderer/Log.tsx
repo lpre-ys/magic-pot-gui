@@ -122,8 +122,8 @@ export default function Log({ batchs, setBatchs }: Props) {
         <div
           className="errorFiles"
           style={{
-            left: pos?.x - 10,
-            top: pos?.y - 10,
+            left: (pos?.x ?? 0) - 10,
+            top: (pos?.y ?? 0) - 10,
           }}
         >
           {showError.errorFiles?.map((path) => {

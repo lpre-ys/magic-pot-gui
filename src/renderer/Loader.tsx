@@ -16,7 +16,9 @@ export default function Loader({
 }: Props) {
   const { t } = useTranslation();
 
-  async function getFilesFromEvent(event: DropEvent): Promise<FileWithPath[]> {
+  async function getFilesFromEvent(
+    event: DropEvent | FileSystemFileHandle[]
+  ): Promise<FileWithPath[]> {
     const files: File[] = await new Promise((resolve) => {
       const dtFiles = (event as DragEvent).dataTransfer?.files;
       if (dtFiles) {
