@@ -58,7 +58,7 @@
     "colord": "^2.10.0",
     "crc": "^4.3.2",
     "electron-squirrel-startup": "^1.0.1",
-    "electron-store": "^11.0.2",
+    "electron-store": "^12.0.0",
     "i18next": "^26.4.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
